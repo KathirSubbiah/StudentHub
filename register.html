@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register New Student</title>
+  <style>
+    body {
+      background-color: white;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+    }
+
+    .register-container {
+      background-color: #f4f4f4;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: black;
+    }
+
+    .input-field {
+      width: 94%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      background-color: #e0e0e0;
+      color: black;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border: 2px solid #000;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .back-button {
+      background-color: #888;
+      color: white;
+      margin-top: 20px;
+    }
+
+    .back-button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <h2>Register New Student</h2>
+    <input type="text" class="input-field" id="name" placeholder="Student Name" required>
+    <input type="number" class="input-field" id="marks" placeholder="Marks" required>
+    <input type="number" class="input-field" id="attendance" placeholder="Attendance (%)" required>
+    <button onclick="submitForm()">Register</button>
+    <button class="back-button" onclick="goBack()">Back</button>
+  </div>
+
+  <script>
+    function submitForm() {
+      const name = document.getElementById("name").value.trim();
+      const marks = document.getElementById("marks").value.trim();
+      const attendance = document.getElementById("attendance").value.trim();
+
+      if (!name || !marks || !attendance) {
+        alert("Please fill all fields.");
+        return;
+      }
+
+      const newStudent = {
+        name: name,
+        marks: marks,
+        attendance: attendance + "%"
+      };
+
+      const students = JSON.parse(localStorage.getItem("students")) || [];
+      students.push(newStudent);
+      localStorage.setItem("students", JSON.stringify(students));
+
+      alert("Student registered successfully.");
+      window.location.href = "admindash.html"; // redirect to admin
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>

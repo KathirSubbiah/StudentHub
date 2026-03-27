@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome</title>
+  <style>
+    /* Reset default styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff; /* Changed to white */
+      color: #000; /* Changed to black */
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .welcome-container {
+      text-align: center;
+      padding: 20px;
+      animation: fadeIn 1s ease-in;
+    }
+
+    .welcome-container h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    .welcome-container p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 1em;
+      color: #fff; /* White text */
+      background-color: #000; /* Black button */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #444; /* Darker hover effect */
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="welcome-container">
+    <h1>Welcome to the Student Management System</h1>
+    <p>Manage everything with ease and simplicity.</p>
+    <button onclick="goToHome()">Get Started</button>
+  </div>
+
+  <script>
+    function goToHome() {
+      // Replace with your actual home page path
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

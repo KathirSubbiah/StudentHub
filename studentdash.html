@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard</title>
+  <style>
+    body {
+      background-color: white;
+      color: black;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .main-content {
+      padding: 20px;
+    }
+    .header {
+      text-align: center;
+      padding: 20px;
+      background-color: #f0f0f0;
+      color: black;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .header h1 {
+      margin: 0;
+    }
+    .header p {
+      font-size: 18px;
+      margin: 10px 0 0;
+    }
+    .logout-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .logout-button:hover {
+      background-color: #d32f2f;
+    }
+    .container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 0;
+    }
+    .profile-box {
+      background-color: #f8f8f8;
+      border-radius: 10px;
+      padding: 20px;
+      width: 45%;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    .profile-box h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .profile-box p {
+      font-size: 18px;
+      margin: 0;
+    }
+    .student-info {
+      margin-top: 20px;
+    }
+    .student-info h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .student-info table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .student-info th, .student-info td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+    .student-info th {
+      background-color: #f2f2f2;
+    }
+    .student-info td {
+      background-color: #fff;
+    }
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .action-buttons button {
+      padding: 15px 30px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 10px;
+    }
+    .action-buttons button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-content">
+    <div class="header">
+      <h1>Student Dashboard</h1>
+      <p id="welcomeMessage">Welcome, Student! Here is your performance summary.</p>
+      <button class="logout-button" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="container">
+      <div class="profile-box">
+        <h3>Student Profile</h3>
+        <p><strong>Name:</strong> <span id="studentName">Loading...</span></p>
+        <p><strong>Roll Number:</strong> <span id="rollNumber">Loading...</span></p>
+        <p><strong>Course:</strong> Computer Science</p>
+      </div>
+
+      <div class="profile-box">
+        <h3>Performance Summary</h3>
+        <p><strong>Percentage:</strong> 85%</p>
+        <p><strong>Attendance:</strong> 90%</p>
+      </div>
+    </div>
+
+    <div class="student-info">
+      <h2>Progress & Performance</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Subject</th>
+            <th>Marks</th>
+            <th>Percentage</th>
+            <th>Attendance</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mathematics</td>
+            <td>80</td>
+            <td>80%</td>
+            <td>90%</td>
+            <td><button onclick="viewDetails()">View Details</button></td>
+          </tr>
+          <tr>
+            <td>Computer Science</td>
+            <td>90</td>
+            <td>90%</td>
+            <td>95%</td>
+            <td><button onclick="viewDetails()">View Details</button></td>
+          </tr>
+          <tr>
+            <td>Physics</td>
+            <td>75</td>
+            <td>75%</td>
+            <td>80%</td>
+            <td><button onclick="viewDetails()">View Details</button></td>
+          </tr>
+          <tr>
+            <td>Chemistry</td>
+            <td>88</td>
+            <td>88%</td>
+            <td>85%</td>
+            <td><button onclick="viewDetails()">View Details</button></td>
+          </tr>
+          <tr>
+            <td>English</td>
+            <td>85</td>
+            <td>85%</td>
+            <td>90%</td>
+            <td><button onclick="viewDetails()">View Details</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="action-buttons">
+      <button onclick="location.href='update-profile.html'">Update Profile</button>
+      <button onclick="location.href='view-grades.html'">View Grades</button>
+    </div>
+  </div>
+
+  <script>
+    // Map student usernames to display names and roll numbers
+    const students = {
+      student1: { name: "John Doe", roll: "12345" },
+      student2: { name: "Jane Smith", roll: "12346" },
+      student3: { name: "Michael Johnson", roll: "12347" },
+      student4: { name: "Emily Davis", roll: "12348" },
+      student5: { name: "William Brown", roll: "12349" },
+      // Add more students here as needed
+    };
+
+    // Load logged in student info from localStorage
+    const loggedInStudent = localStorage.getItem('loggedInStudent');
+
+    function loadStudentInfo() {
+      if (loggedInStudent && students[loggedInStudent]) {
+        const student = students[loggedInStudent];
+        document.getElementById('welcomeMessage').textContent = `Welcome, ${student.name}! Here is your performance summary.`;
+        document.getElementById('studentName').textContent = student.name;
+        document.getElementById('rollNumber').textContent = student.roll;
+      } else {
+        // If no logged in student found, redirect to login page
+        alert('No student logged in. Redirecting to login page.');
+        window.location.href = 'login.html';
+      }
+    }
+
+    function viewDetails() {
+      alert("Details of the selected subject are being displayed.");
+    }
+
+    function logout() {
+      localStorage.removeItem('loggedInStudent'); // Clear login info
+      window.location.href = 'login.html';
+    }
+
+    // Run this when page loads
+    window.onload = loadStudentInfo;
+  </script>
+
+</body>
+</html>

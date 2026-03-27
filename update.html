@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Update Student Info</title>
+  <style>
+    body {
+      background-color: white;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+    }
+
+    .update-container {
+      background-color: #f4f4f4;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: black;
+    }
+
+    .input-field {
+      width: 94%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      background-color: #e0e0e0;
+      color: black;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border: 2px solid #000;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .back-button {
+      background-color: #888;
+      color: white;
+      margin-top: 20px;
+    }
+
+    .back-button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="update-container">
+    <h2>Update Student Info</h2>
+    <!-- Sample Student Data -->
+    <input type="text" id="studentName" class="input-field" placeholder="Student Name"  required>
+    <input type="number" id="marks" class="input-field" placeholder="Marks"  required>
+    <input type="number" id="attendance" class="input-field" placeholder="Attendance"  required>
+    <button onclick="updateStudent()">Update</button>
+    <button class="back-button" onclick="goBack()">Back</button>
+  </div>
+
+  <script>
+    // Function to handle the update
+    function updateStudent() {
+      // Get the values entered by the user
+      var name = document.getElementById("studentName").value;
+      var marks = document.getElementById("marks").value;
+      var attendance = document.getElementById("attendance").value;
+
+      // Check if the fields are not empty
+      if (name && marks && attendance) {
+        // Show the updated data (For demo purposes)
+        alert("Student info updated successfully.\n\nName: " + name + "\nMarks: " + marks + "\nAttendance: " + attendance);
+        
+        // Here you can send the updated data to your backend API or update a local storage / database
+      } else {
+        alert("Please fill all fields correctly.");
+      }
+    }
+
+    // Function to go back to the previous page
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>
